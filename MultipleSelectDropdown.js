@@ -80,8 +80,14 @@ function MultipleSelectDropdown({
    */
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  /**
+  *  State cariable holding the array of selected options. 
+  */
   const [selections, setSelections] = useState(selectedValues ?? []);
 
+  /**
+  * Listen for updates to the selectedValues prop and update the state. 
+  */
   useEffect(() => {
     setSelections(selectedValues);
   }, [selectedValues]);
@@ -109,10 +115,21 @@ function MultipleSelectDropdown({
     }).start(() => setDropdownVisible(false));
   };
 
+  /**
+  * Removes the selected option and calls the onSelectionsUpdate function prop with the updated selections.
+  * 
+  * @param {String} selection - Selection to be Removed.
+  */
   function handleRemoveOption(selection) {
     onSelectionsUpdate(selections.filter((item) => item !== selection));
   }
 
+  /**
+  * Adds the selected option to the selections array (or removes it if it is already included) 
+  * and calls the onSelectionsUpdate function prop with the updated selections.
+  * 
+  * @param {String} selection - Selection to be Removed.
+  */
   function handleOptionPress(option) {
     onSelectionsUpdate(
       selections.includes(option)
@@ -121,6 +138,9 @@ function MultipleSelectDropdown({
     );
   }
 
+  /**
+  * Toggles the dropdown menu display.
+  */
   function handleInputPress() {
     dropdownVisible ? slideup() : slidedown();
   }
